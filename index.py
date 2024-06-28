@@ -1,18 +1,18 @@
+from gevent import monkey
+monkey.patch_all()
+
 import bottle
 from bottle import route, run, template
 import json
 import image
 import gevent
-from gevent import monkey
-
-monkey.patch_all()
 
 def call_service():
     directoryName = 'photos'
     image.process(directoryName)
 
 def async_call_service():
-    gevent.spawn(call_service)
+     gevent.spawn(call_service)
 
 @route('/')
 def index():
